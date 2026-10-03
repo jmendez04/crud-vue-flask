@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, app
 
 from .extensions import cors, db, migrate
 
@@ -39,10 +39,14 @@ def create_app(test_config=None):
             }
         },
     )
+    
+    from . import models  # noqa: F401
+
+    from .api import api_bp
+    app.register_blueprint(api_bp, url_prefix="/api")
 
     @app.get("/health")
     def health_check():
         return {"status": "ok"}
 
-    from . import models  # noqa: F401
     return app
