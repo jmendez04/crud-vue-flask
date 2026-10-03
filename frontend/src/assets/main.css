@@ -1,35 +1,120 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #1f2937;
+  background: #f3f4f6;
 }
 
-a,
-.green {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 5%;
+  background: #172554;
+  color: white;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.topbar a {
+  color: white;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.topbar a.router-link-active {
+  color: #a8ff3e;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.container {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.card,
+.table-wrapper {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 10px #0001;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field input,
+select {
+  padding: 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.4rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.7rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 0;
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  cursor: pointer;
+}
+
+.button--primary {
+  background: #172554;
+  color: white;
+}
+
+.button--secondary {
+  background: #e2e8f0;
+  color: #172554;
+}
+
+.button--danger {
+  background: #dc2626;
+  color: white;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alert--error {
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 0.75rem;
 }
