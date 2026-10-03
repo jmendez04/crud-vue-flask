@@ -44,4 +44,5 @@ def create_app(test_config=None):
     def health_check():
         return {"status": "ok"}
 
+    from . import models  # noqa: F401
     return app
