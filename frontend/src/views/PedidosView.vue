@@ -5,7 +5,7 @@
     <AlertMessage :message="error" />
     <p v-if="cargando">
       Cargando...
-    </p>"
+    </p>
 
     <form class="card form-grid" @submit.prevent="crearPedido">
       <label class="field">
