@@ -3,6 +3,9 @@
     <h2>Pedidos</h2>
 
     <AlertMessage :message="error" />
+    <p v-if="cargando">
+      Cargando...
+    </p>"
 
     <form class="card form-grid" @submit.prevent="crearPedido">
       <label class="field">
@@ -145,6 +148,7 @@ const clientes = ref([])
 const productos = ref([])
 const error = ref('')
 const guardando = ref(false)
+const cargando = ref(false)
 
 const form = reactive({
   cliente_id: '',
@@ -154,6 +158,7 @@ const form = reactive({
 
 async function cargarDatos() {
   error.value = ''
+  cargando.value = true
 
   try {
     const [
@@ -171,6 +176,8 @@ async function cargarDatos() {
     productos.value = respuestaProductos.data
   } catch (err) {
     error.value = err.message
+  } finally {
+    cargando.value = false
   }
 }
 

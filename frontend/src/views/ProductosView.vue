@@ -4,10 +4,15 @@
 
     <AlertMessage :message="error" />
 
+    <p v-if="cargando">
+      Cargando...
+    </p>
+
     <form class="card form-grid" @submit.prevent="guardar">
       <BaseInput
         v-model="form.nombre"
         label="Nombre"
+        required
       />
 
       <BaseInput
@@ -15,16 +20,19 @@
         label="Descripción"
       />
 
+
       <BaseInput
         v-model="form.precio"
         label="Precio"
         type="number"
+        required
       />
 
       <BaseInput
         v-model="form.stock"
         label="Stock"
         type="number"
+        required
       />
 
       <label class="field">
@@ -92,6 +100,7 @@ const error = ref('')
 const guardando = ref(false)
 const editando = ref(false)
 const idEditando = ref(null)
+const cargando = ref(false)
 
 const columns = [
   { key: 'id', label: 'ID' },
@@ -124,12 +133,15 @@ function limpiar() {
 
 async function cargar() {
   error.value = ''
+  cargando.value = true
 
   try {
     const response = await productosApi.listar()
     productos.value = response.data
-  } catch (err) {
+  } catch(err){
     error.value = err.message
+  } finally {
+    cargando.value = false
   }
 }
 

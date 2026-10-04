@@ -4,16 +4,22 @@
 
     <AlertMessage :message="error" />
 
+    <p v-if="cargando">
+      Cargando...
+    </p>
+
     <form class="card form-grid" @submit.prevent="guardar">
       <BaseInput
         v-model="form.nombre"
         label="Nombre"
+        required
       />
 
       <BaseInput
         v-model="form.correo"
         label="Correo"
         type="email"
+        required
       />
 
       <BaseInput
@@ -77,6 +83,7 @@ const error = ref('')
 const guardando = ref(false)
 const editando = ref(false)
 const idEditando = ref(null)
+const cargando = ref(false)
 
 const columns = [
   { key: 'id', label: 'ID' },
@@ -104,28 +111,15 @@ function limpiar() {
 
 async function cargar() {
   error.value = ''
+  cargando.value = true
 
   try {
-    console.log(
-      'API URL:',
-      import.meta.env.VITE_API_URL,
-    )
-
     const response = await clientesApi.listar()
-
-    console.log(
-      'Respuesta clientes:',
-      response,
-    )
-
     clientes.value = response.data
-  } catch (err) {
-    console.error(
-      'Error Axios:',
-      err,
-    )
-
+  } catch(err) {
     error.value = err.message
+  } finally {
+    cargando.value = false
   }
 }
 

@@ -6,8 +6,9 @@
       :value="modelValue"
       :type="type"
       :placeholder="placeholder"
+      :required="required"
       @input="$emit('update:modelValue', $event.target.value)"
-    />
+      />
 
     <small
       v-if="error"
@@ -39,6 +40,10 @@ defineProps({
   error: {
     type: String,
     default: '',
+  },
+  required: {
+    type: Boolean,
+    default: false,
   },
 })
 
